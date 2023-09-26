@@ -1,3 +1,4 @@
+// This module responsability is to provide a way to create HTML Elements more easily
 class Element{
     constructor(elementTag, elementClass, elementId){
         this.elementTag = elementTag;

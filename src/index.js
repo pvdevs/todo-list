@@ -1,9 +1,12 @@
 import './style.css';
-import Element from './elementDOM';
+import Element from './element-DOM';
+import createTaskElement from './DOM';
+import Task from './create-task';
 
 const content = document.getElementById('content');
 
-const test = new Element('h1', 'hello', 'ts');
+const task = new Task('titleTest','descTest','dueDateTest','priorityTest'); //this will work through event listenner;
 
-test.htmlElement.textContent = 'hello!'
-content.appendChild(test.htmlElement)
+const test = createTaskElement(task);
+
+content.appendChild(test);
