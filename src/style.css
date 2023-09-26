@@ -11,13 +11,52 @@ body {
     color: red;
 }
 
+.task{
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: repeat(3, 1fr);
+    row-gap: 8px;
+    column-gap: 16px;
+    padding: 24px 48px;
+    border-top: solid 1px #D6D7D9;
+    border-bottom: solid 1px #D6D7D9;
+}
+
 .task-title{
+    grid-row: 1;
+    grid-column: 2;
     font-size: 1rem;
     color: blue;
 }
 
+.task-description{
+    grid-row: 2;
+    grid-column: 2;
+}
+
+.task-due-date{
+    grid-row: 3;
+    grid-column: 2;
+}
+
 .task-done-btn{
+    grid-row: 2;
     width: 16px;
     height: 16px;
+    border-radius: 100%;
+}
+
+.task-priority {
+    grid-row: 2;
+    grid-column: 3;
+
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.task-priority-icon{
+    width: 12px;
+    height: 12px;
     border-radius: 100%;
 }
