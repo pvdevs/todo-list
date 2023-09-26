@@ -1,9 +1,9 @@
 import './style.css';
+import Element from './elementDOM';
 
 const content = document.getElementById('content');
-const hello = document.createElement('h3');
 
-hello.classList.add('hello');
-hello.textContent = 'Hello';
+const test = new Element('h1', 'hello', 'ts');
 
-content.appendChild(hello);
+test.htmlElement.textContent = 'hello!'
+content.appendChild(test.htmlElement)

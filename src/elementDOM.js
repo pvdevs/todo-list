@@ -1,20 +1,16 @@
-function getElement(element,elementClass,elementId){
-
-}
-
 class Element{
-    constructor(element, elementClass, elementId){
-        this.element = element;
+    constructor(elementTag, elementClass, elementId){
+        this.elementTag = elementTag;
         this.elementClass = elementClass;
         this.elementId = elementId;
+
+        this.element = document.createElement(`${elementTag}`);
+        this.element.classList.add(`${this.elementClass}`);
+        if (this.elementId) this.element.setAttribute('id',`${elementId}`);
     }
 
-    get thisClass() {
-        return this.elementClass;
-    }
-
-    get thisId() {
-        return this.elementId
+    get htmlElement() {
+        return this.element;
     }
 }
 
