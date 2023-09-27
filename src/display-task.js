@@ -6,15 +6,28 @@ import Task from './create-task';
 const content = document.getElementById('content');
 
 function getTaskPriority(task){
-    const taskPriority = new Element('div', 'task-priority').htmlElement;
-    const taskPriorityText = new Element('p', 'task-priority-text').htmlElement;
-    const taskPriorityIcon = new Element('div', 'task-priority-icon').htmlElement;
+    const taskPriority = new TaskPriority(`${task.priority}`);
 
-    taskPriorityText.textContent = 'High priority';
+    return taskPriority.priority;
+}
 
-    taskPriority.append(taskPriorityText, taskPriorityIcon);
+class TaskPriority {
+    constructor(priorityLevel){
+        this._container = new Element('div', 'task-priority').htmlElement;
+        this._text = new Element('p', 'task-priority-text').htmlElement;
+        this._icon = new Element('div', 'task-priority-icon').htmlElement;
 
-    return taskPriority
+        this._text.textContent = `${priorityLevel} priority`;
+        this._icon.classList.add(`${priorityLevel}-priority-icon`);
+
+        this._text.textContent = this._text.textContent.charAt(0).toUpperCase() + this._text.textContent.slice(1);
+
+        this._container.append(this._text, this._icon);
+    }
+
+    get priority() {
+        return this._container;
+    }
 }
 
 function createTaskElement(task) {
@@ -24,54 +37,19 @@ function createTaskElement(task) {
     const taskDueDate = new Element('p', 'task-due-date').htmlElement;
     const taskDoneBtn = new Element('button', 'task-done-btn').htmlElement;
     const taskPriority = getTaskPriority(task);
+    const editBtn = new Element('p', 'task-edit-btn').htmlElement;
 
     taskContainer.dataset.id = task.id; // Set the same task object identifier into the html
     taskTitle.textContent = task.title;
     taskDescription.textContent = task.description;
     taskDueDate.textContent = task.dueDate;
+    editBtn.textContent = 'Edit';
 
-    taskContainer.append(taskDoneBtn, taskTitle, taskDescription, taskDueDate, taskPriority);
+    taskContainer.append(taskDoneBtn, taskTitle, taskDescription, taskDueDate, taskPriority, editBtn);
     content.appendChild(taskContainer);
     return taskContainer;
 }
 
-class TaskElement {
-    constructor(task) {
-        this._taskContainer = new Element('div','task').htmlElement;
-        this._taskTitle = new Element('p','task-title').htmlElement;
-        this._taskDescription = new Element('p', 'task-description').htmlElement;
-        this._taskDueDate = new Element('p', 'task-due-date').htmlElement;
-        this._taskDoneBtn = new Element('button', 'task-done-btn').htmlElement;
-        this._taskContainer.dataset.id = task.id;
-    }
-
-    get taskTitle() {
-        return this._taskTitle;
-    }
-    set taskTitle(value){
-        // maybe some validation here
-        this._taskTitle = value;
-    }
-
-    get taskDescription() {
-        return this._taskDescription;
-    }
-    set taskDescription(value){
-        // maybe some validation here
-        this._taskDescription = value;
-    }
-
-    set taskTitle(value){
-        // maybe some validation here
-        taskTitle = value;
-    }
-
-    set taskTitle(value){
-        // maybe some validation here
-        taskTitle = value;
-    }
-}
-
-// How do we display the Todo Update?
+// How do we display the Task Update?
 
 export default createTaskElement;
