@@ -1,7 +1,8 @@
 import './style.css';
 import Element from './create-dom-element';
-import createTaskElement from './display-task';
-import {Task, editTask, findTask, tasks} from './tasks';
+import {displayTask, createTask} from './display-task';
+import {Task, findTask, tasks} from './tasks';
+//import editBtnEvent from './events';
 
 const content = document.getElementById('content');
 
@@ -9,12 +10,18 @@ const task = new Task('Buy my P.O 33 K.O','Buy as soon as possible to make the b
 
 const task2 = new Task('Learn DJ STUF!','Learn to make the beats!','10/4','high'); //this will work through event listenner;
 
-tasks.push(task)
-tasks.push(task2)
+tasks.push(task); // delete later
+tasks.push(task2); // delete later
+console.log(tasks); // delete later
 
-editTask(task2.id, 'Testing Title', 'ayo');
+// Move this to separate module later
+document.body.addEventListener('click', e => {
+    if( e.target.classList.contains('task-edit-btn')) {
+        console.log('works');
+    }
+})
+//
 
-console.log(tasks);
-
-const test = createTaskElement(task);
-content.appendChild(test);
+const test = displayTask(task);
+const test2 = createTask();
+content.append(test,test2);

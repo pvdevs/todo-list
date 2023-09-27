@@ -57,11 +57,7 @@ class Task {
     }
 }
 
-// Edit Task // Still thinking about this Feature, it may be better if we change directly with findtask, but idk;
-
-function editTask(taskId, title, description, dueDate, priority, project) {
-   const task = findTask(taskId);
-}
+// Edit Task // Still thinking about this Feature, it may be better if we change directly with findtask, with DOM, that way we can set each info equal to the textContent;
 
 // Find Task
 function findTask(taskId){
@@ -73,4 +69,4 @@ function findTask(taskId){
 const tasks = [];
 
 
-export {Task, editTask, findTask, tasks}
+export {Task, findTask, tasks}
