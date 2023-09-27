@@ -1,7 +1,5 @@
-// Set display to task through DOM
-
 import Element from './create-dom-element';
-import Task from './create-task';
+import Task from './tasks';
 
 const content = document.getElementById('content');
 

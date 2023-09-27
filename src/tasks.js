@@ -1,11 +1,14 @@
+// This module will contain all the tasks
 import uniqid from 'uniqid'; // Used this package to generate unique Id's;
 
+// Create new Tasks
 class Task {
-    constructor(title, description, dueDate, priority) {
+    constructor(title, description, dueDate, priority, project) {
         this._title = title;
         this._description = description;
         this._dueDate = dueDate;
         this._priority = priority;
+        this._project = project;
         this._id = uniqid();
     }
 
@@ -44,6 +47,30 @@ class Task {
         // validation here, prob.
         this._priority = value;
     }
+    
+    get project() {
+        return this_.project;
+    }
+    set project(value) {
+        // validation here, prob.
+        this._project = value;
+    }
 }
 
-export default Task;
+// Edit Task // Still thinking about this Feature, it may be better if we change directly with findtask, but idk;
+
+function editTask(taskId, title, description, dueDate, priority, project) {
+   const task = findTask(taskId);
+}
+
+// Find Task
+function findTask(taskId){
+    const foundTask = tasks.find(task => task.id === taskId);
+    return foundTask;
+}
+
+// Tasks
+const tasks = [];
+
+
+export {Task, editTask, findTask, tasks}
