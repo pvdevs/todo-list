@@ -1,8 +1,8 @@
 import './style.css';
 import Element from './create-dom-element';
-import {displayTask, createTask} from './display-task';
+import displayTask from './display-task';
 import {Task, findTask, tasks} from './tasks';
-//import editBtnEvent from './events';
+import createTask from './create-task';
 
 const content = document.getElementById('content');
 
@@ -21,7 +21,8 @@ document.body.addEventListener('click', e => {
     }
 })
 //
-
 const test = displayTask(task);
 const test2 = createTask();
+
+
 content.append(test,test2);

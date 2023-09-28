@@ -48,51 +48,8 @@ function displayTask(task) {
     return container;
 }
 
-class TaskForm {
-    constructor(){
-        this._container = new Element('form', 'add-task-form').htmlElement;
-        this._title = new Element('input', 'add-task-input', 'title-input').htmlElement;
-        this._description = new Element('textarea', 'add-task-description-label', 'description-textarea').htmlElement;
-
-        this._container.append(this._title, this._description);
-    }
-
-    get formElement() {
-        return this._container;
-    }
-
-    get title() {
-        return this._title
-    }
-    set title(value) {
-        // Validation
-        return this._title = value;
-    }
-
-    get description() {
-        return this._description
-    }
-    set description(value) {
-        // Validation
-        return this._description = value;
-    }
-}
-
 // How do we display the Task Update?
-function createTask() {
-    const container = new Element('div', 'add-task-container').htmlElement;
-    const form = new TaskForm();
-    const bottom = new Element('div', 'add-task-bottom-container').htmlElement;
-    const taskPriority = new TaskPriority('high').priority //this is just for testing
 
-    form.title.value = 'teste';
-    form.description.value = 'teste';
-
-
-    bottom.appendChild(taskPriority)
-    container.append(form.formElement, bottom);
-    return container;
-}
 
 /* First do the add new task
 function editTaskElement(taskId) {
@@ -104,4 +61,4 @@ function editTaskElement(taskId) {
 
 
 
-export {displayTask, createTask};
+export default displayTask;
