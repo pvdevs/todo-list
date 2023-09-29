@@ -1,8 +1,10 @@
 import Element from './create-dom-element';
 import {Task, findTask, tasks} from './task';
+import taskTable from './tasks-table';
 
 const content = document.getElementById('content');
 
+// this needs to go, i alredy done this in another module
 function getTaskPriority(task){
     const taskPriority = new TaskPriority(`${task.priority}`);
 
@@ -48,17 +50,24 @@ function displayTask(task) {
     return container;
 }
 
-// How do we display the Task Update?
+function fillTasksTable() {
+    const tasksContainer = document.querySelector('.tasks-container');
 
-
-/* First do the add new task
-function editTaskElement(taskId) {
-    const task = findTask(taskId);
-    const taskElement = document.querySelector([`data-id=${taskId}`]);
-    const
+    clearTaskTable();
+    
+    tasks.forEach(task => {
+        tasksContainer.appendChild(displayTask(task));
+    });
+    
+    return tasksContainer;
 }
-*/
 
+function clearTaskTable() {
+    const tasksContainer = document.querySelector('.tasks-container');
 
+    while(tasksContainer.firstChild) {
+        tasksContainer.removeChild(tasksContainer.lastChild);
+    }
+}
 
-export default displayTask;
+export {displayTask, fillTasksTable};

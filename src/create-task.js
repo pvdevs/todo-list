@@ -1,8 +1,8 @@
 import Element from './create-dom-element';
 import {Task, findTask, tasks} from './task';
 import { compareAsc, format } from 'date-fns';
-import displayTask from './display-task';
-
+import {displayTask, fillTasksTable} from './display-task';
+import taskTable from './tasks-table';
 
 function createTask(task) {
     const container = new Element('div', 'add-task-container').htmlElement;
@@ -167,7 +167,9 @@ function saveBtnEvent() {
         ////
 
         const task = new Task(title.value, description.value, dueDate.value, priority.value);
+        tasks.push(task);
         console.log(task);
+        fillTasksTable();
     })
 }
 
