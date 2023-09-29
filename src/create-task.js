@@ -77,7 +77,6 @@ function getPriority(currentPriority) {
     const optionHigh = new Element('option').htmlElement;
     const optionMid = new Element('option').htmlElement;
     const optionLow = new Element('option').htmlElement;
-    const iconContainer = new Element('div', 'priority-icon-container').htmlElement;
     const icon = new Element('div', 'priority-icon').htmlElement;
 
     optionHigh.value = 'High';
@@ -91,9 +90,10 @@ function getPriority(currentPriority) {
 
     optionMid.selected = true;
 
-    iconContainer.appendChild(icon);
+    icon.classList.add(`${currentPriority}-priority-icon`);
+
     selectBtn.append(optionHigh,optionMid,optionLow);
-    selectContainer.append(iconContainer, selectBtn);
+    selectContainer.append(icon, selectBtn);
 
     return selectContainer;
 }
