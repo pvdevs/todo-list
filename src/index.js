@@ -1,7 +1,7 @@
 import './style.css';
 import Element from './create-dom-element';
 import displayTask from './display-task';
-import {Task, findTask, tasks} from './tasks';
+import {Task, findTask, tasks} from './task';
 import createTask from './create-task';
 
 
@@ -9,7 +9,7 @@ const content = document.getElementById('content');
 
 const task = new Task('Buy my P.O 33 K.O','Buy as soon as possible to make the beats!','12/4','high'); //this will work through event listenner;
 
-const task2 = new Task('Learn DJ STUF!','Learn to make the beats!','2024-02-14','low'); //this will work through event listenner;
+const task2 = new Task('Learn DJ STUF!','Learn to make the beats!','2024-02-14','high'); //this will work through event listenner;
 
 tasks.push(task); // delete later
 tasks.push(task2); // delete later

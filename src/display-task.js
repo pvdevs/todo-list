@@ -1,5 +1,5 @@
 import Element from './create-dom-element';
-import {Task, findTask, tasks} from './tasks';
+import {Task, findTask, tasks} from './task';
 
 const content = document.getElementById('content');
 

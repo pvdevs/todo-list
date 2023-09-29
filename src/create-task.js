@@ -1,6 +1,7 @@
 import Element from './create-dom-element';
-import {Task, findTask, tasks} from './tasks';
-import { compareAsc, format } from 'date-fns'
+import {Task, findTask, tasks} from './task';
+import { compareAsc, format } from 'date-fns';
+import displayTask from './display-task';
 
 
 function createTask(task) {
@@ -12,7 +13,6 @@ function createTask(task) {
     return container;
 }
 
-
 function getForm(task) {
     const form = new Element('form','add-task-form').htmlElement;
 
@@ -20,6 +20,13 @@ function getForm(task) {
     const formBottom = getFormBottom(task);
 
     form.append(formTop, formBottom);
+
+    //btnEvents();
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Your code here, including the btnEvents() function.
+        saveBtnEvent();
+    });
 
     return form;
 }
@@ -65,8 +72,11 @@ function getFormBottomLeft(task) {
 
 function getFormBottomRight() {
     const formBottomRight = new Element('div', 'form-task-bottom-right').htmlElement;
-    const cancelBtn = new Element ('button', 'cancel-btn').htmlElement;
-    const saveBtn = new Element ('button', 'save-btn').htmlElement;
+    const cancelBtn = new Element ('button', 'form-btn', 'cancel-btn').htmlElement;
+    const saveBtn = new Element ('button', 'form-btn', 'save-btn').htmlElement;
+
+    saveBtn.type = 'button';
+    cancelBtn.type= 'button';
 
     cancelBtn.textContent = 'Cancel';
     saveBtn.textContent = 'Save';
@@ -101,7 +111,7 @@ function getChoosedPriority(task) {
 
 function getPriorityIcon(priority) {
     const icon = new Element('div', 'priority-icon').htmlElement;
- 
+
 }
 
 function highPriority() {
@@ -143,6 +153,22 @@ function getPriority(task) {
     selectContainer.append(icon, selectBtn);
 
     return selectContainer;
+}
+
+function saveBtnEvent() {
+    const saveBtn = document.getElementById('save-btn');
+
+    saveBtn.addEventListener('click', e => {
+
+        const title = document.getElementById('title-input');
+        const description = document.getElementById('description-textarea');
+        const dueDate = document.querySelector('.add-task-date');
+        const priority = document.querySelector('.select-priority-btn');
+        ////
+
+        const task = new Task(title.value, description.value, dueDate.value, priority.value);
+        console.log(task);
+    })
 }
 
 export default createTask;
