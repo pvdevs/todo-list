@@ -81,9 +81,9 @@ function getDate(task) {
     const taskDate = new Element('input', 'add-task-date').htmlElement;
 
     taskDate.type = 'date';
-    taskDate.min = todayDate;
 
     if(task !== undefined) taskDate.value = task.dueDate;
+    taskDate.min = todayDate;
 
     return taskDate;
 }
@@ -95,8 +95,13 @@ function getChoosedPriority(task) {
         'low' : lowPriority()
     }
 
-    if(task !== undefined) priorityLevels[task].selected = true;    
+    if(task !== undefined) priorityLevels[task.priority].selected = true;    
     return priorityLevels;
+}
+
+function getPriorityIcon(priority) {
+    const icon = new Element('div', 'priority-icon').htmlElement;
+ 
 }
 
 function highPriority() {
@@ -129,7 +134,7 @@ function getPriority(task) {
     const selectBtn = new Element('select', 'select-priority-btn').htmlElement;
     const icon = new Element('div', 'priority-icon').htmlElement;
 
-    const priorityLevels = getChoosedPriority();
+    const priorityLevels = getChoosedPriority(task);
 
     Object.values(priorityLevels).forEach(value => {
         selectBtn.appendChild(value);
@@ -139,36 +144,5 @@ function getPriority(task) {
 
     return selectContainer;
 }
-
-/* Trying something cleaner now
-function getPriority(task) {
-    const selectContainer = new Element('div', 'select-priority-container').htmlElement;
-    const selectBtn = new Element('select', 'select-priority-btn').htmlElement;
-    const optionHigh = highPriority()
-    const optionMid = mediumPriority()
-    const optionLow = lowPriority()
-    const icon = new Element('div', 'priority-icon').htmlElement;
-
-    optionHigh.value = 'High';
-    optionHigh.textContent = 'High Priority'
-
-    optionMid.value = 'Medium';
-    optionMid.textContent = 'Medium Priority';
-
-    optionLow.value = 'Low';
-    optionLow.textContent = 'Low Priority';
-
-    optionMid.selected = true;
-
-    if (task!== undefined) {
-        getChoosedPriority(task.priority);
-    }
-
-    selectBtn.append(optionHigh,optionMid,optionLow);
-    selectContainer.append(icon, selectBtn);
-
-    return selectContainer;
-}
-*/
 
 export default createTask;
