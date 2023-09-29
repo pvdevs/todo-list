@@ -173,4 +173,4 @@ function saveBtnEvent() {
     })
 }
 
-export default createTask;
+export {createTask, getForm};

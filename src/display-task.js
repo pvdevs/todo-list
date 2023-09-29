@@ -31,6 +31,7 @@ class TaskPriority {
 }
 
 function displayTask(task) {
+    const taskContainer = new Element('div', 'task-container').htmlElement;
     const container = new Element('div','task').htmlElement;
     const title = new Element('p','task-title').htmlElement;
     const description = new Element('p', 'task-description').htmlElement;
@@ -46,8 +47,10 @@ function displayTask(task) {
     editBtn.textContent = 'Edit';
 
     container.append(doneBtn, title, description, dueDate, taskPriority, editBtn);
-    content.appendChild(container);
-    return container;
+    taskContainer.appendChild(container);
+
+    content.appendChild(taskContainer);
+    return taskContainer;
 }
 
 function fillTasksTable() {
@@ -58,7 +61,7 @@ function fillTasksTable() {
     tasks.forEach(task => {
         tasksContainer.appendChild(displayTask(task));
     });
-    
+
     return tasksContainer;
 }
 
