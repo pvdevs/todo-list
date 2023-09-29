@@ -68,5 +68,4 @@ function findTask(taskId){
 // Tasks
 const tasks = [];
 
-
 export {Task, findTask, tasks}

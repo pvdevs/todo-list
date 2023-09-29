@@ -1,35 +1,51 @@
 import Element from './create-dom-element';
 import {Task, findTask, tasks} from './tasks';
+import { compareAsc, format } from 'date-fns'
 
 
-function getForm() {
+function createTask(task) {
+    const container = new Element('div', 'add-task-container').htmlElement;
+
+    const form = getForm(task);
+
+    container.append(form);
+    return container;
+}
+
+
+function getForm(task) {
     const form = new Element('form','add-task-form').htmlElement;
 
-    const formTop = getFormTop();
-    const formBottom = getFormBottom();
+    const formTop = getFormTop(task);
+    const formBottom = getFormBottom(task);
 
     form.append(formTop, formBottom);
 
     return form;
 }
 
-function getFormTop() {
+function getFormTop(task) {
     const formTop = new Element('div', 'add-task-form-top').htmlElement;
     const title = new Element('input', 'add-task-input', 'title-input').htmlElement;;
     const description = new Element('textarea', 'add-task-description-label', 'description-textarea').htmlElement;
 
-    title.value = 'teste';
-    description.value = 'teste';
+    if(task !== undefined) {
+        title.value = task.title;
+        description.value = task.description;
+    } else {
+        title.value = 'teste';
+        description.value = 'teste';
+    }
 
     formTop.append(title, description);
 
     return formTop;
 }
 
-function getFormBottom() {
+function getFormBottom(task) {
     const formBottom = new Element('div', 'add-task-bottom').htmlElement;
 
-    const formBottomLeft = getFormBottomLeft();
+    const formBottomLeft = getFormBottomLeft(task);
     const formBottomRight = getFormBottomRight();
 
     formBottom.append(formBottomLeft, formBottomRight);
@@ -37,10 +53,10 @@ function getFormBottom() {
     return formBottom;
 }
 
-function getFormBottomLeft() {
+function getFormBottomLeft(task) {
     const formBottomLeft = new Element('div', 'add-task-bottom-left').htmlElement;
-    const taskPriority = getPriority();
-    const taskDate = getDate();
+    const taskPriority = getPriority(task);
+    const taskDate = getDate(task);
 
     formBottomLeft.append(taskDate, taskPriority);
 
@@ -60,23 +76,77 @@ function getFormBottomRight() {
     return formBottomRight
 }
 
-function getDate() {
-    const todayDate = new Date().toJSON().slice(0,10);
+function getDate(task) {
+    const todayDate = format(new Date(), 'yyyy-MM-dd');
     const taskDate = new Element('input', 'add-task-date').htmlElement;
 
     taskDate.type = 'date';
     taskDate.min = todayDate;
 
+    if(task !== undefined) taskDate.value = task.dueDate;
+
     return taskDate;
 }
 
+function getChoosedPriority(task) {
+    const priorityLevels = {
+        'high' : highPriority(),
+        'medium' : mediumPriority(),
+        'low' : lowPriority()
+    }
 
-function getPriority(currentPriority) {
+    if(task !== undefined) priorityLevels[task].selected = true;    
+    return priorityLevels;
+}
+
+function highPriority() {
+    const optionHigh = document.createElement('option');
+
+    optionHigh.value = 'High';
+    optionHigh.textContent = 'High Priority';
+
+    return optionHigh;
+}
+
+function mediumPriority() {
+    const optionMid = document.createElement('option');
+    optionMid.value = 'Mid';
+    optionMid.textContent = 'Mid Priority';
+
+    return optionMid;
+}
+
+function lowPriority() {
+    const optionLow = document.createElement('option');
+    optionLow.value = 'Low';
+    optionLow.textContent = 'Low Priority';
+
+    return optionLow;
+}
+
+function getPriority(task) {
     const selectContainer = new Element('div', 'select-priority-container').htmlElement;
     const selectBtn = new Element('select', 'select-priority-btn').htmlElement;
-    const optionHigh = new Element('option').htmlElement;
-    const optionMid = new Element('option').htmlElement;
-    const optionLow = new Element('option').htmlElement;
+    const icon = new Element('div', 'priority-icon').htmlElement;
+
+    const priorityLevels = getChoosedPriority();
+
+    Object.values(priorityLevels).forEach(value => {
+        selectBtn.appendChild(value);
+    });
+
+    selectContainer.append(icon, selectBtn);
+
+    return selectContainer;
+}
+
+/* Trying something cleaner now
+function getPriority(task) {
+    const selectContainer = new Element('div', 'select-priority-container').htmlElement;
+    const selectBtn = new Element('select', 'select-priority-btn').htmlElement;
+    const optionHigh = highPriority()
+    const optionMid = mediumPriority()
+    const optionLow = lowPriority()
     const icon = new Element('div', 'priority-icon').htmlElement;
 
     optionHigh.value = 'High';
@@ -90,21 +160,15 @@ function getPriority(currentPriority) {
 
     optionMid.selected = true;
 
-    icon.classList.add(`${currentPriority}-priority-icon`);
+    if (task!== undefined) {
+        getChoosedPriority(task.priority);
+    }
 
     selectBtn.append(optionHigh,optionMid,optionLow);
     selectContainer.append(icon, selectBtn);
 
     return selectContainer;
 }
-
-function createTask() {
-    const container = new Element('div', 'add-task-container').htmlElement;
-
-    const form = getForm();
-
-    container.append(form);
-    return container;
-}
+*/
 
 export default createTask;

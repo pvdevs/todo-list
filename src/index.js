@@ -4,11 +4,12 @@ import displayTask from './display-task';
 import {Task, findTask, tasks} from './tasks';
 import createTask from './create-task';
 
+
 const content = document.getElementById('content');
 
 const task = new Task('Buy my P.O 33 K.O','Buy as soon as possible to make the beats!','12/4','high'); //this will work through event listenner;
 
-const task2 = new Task('Learn DJ STUF!','Learn to make the beats!','10/4','high'); //this will work through event listenner;
+const task2 = new Task('Learn DJ STUF!','Learn to make the beats!','12/04/2024','high'); //this will work through event listenner;
 
 tasks.push(task); // delete later
 tasks.push(task2); // delete later
@@ -22,7 +23,6 @@ document.body.addEventListener('click', e => {
 })
 //
 const test = displayTask(task);
-const test2 = createTask();
-
+const test2 = createTask(task2);
 
 content.append(test,test2);
