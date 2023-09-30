@@ -1,10 +1,10 @@
 import './style.css';
 import Element from './create-dom-element';
-import {displayTask, fillTasksTable} from './display-task';
-import taskTable from './tasks-table';
+import {displayTask} from './display-task';
+import {taskTable, fillTasksTable} from './tasks-table';
 import {Task, findTask, tasks} from './task';
 import {createTask} from './create-task';
-import editTask from './edit-task';
+import editBtnListener from './edit-task';
 
 const content = document.getElementById('content');
 
@@ -16,7 +16,7 @@ const task2 = new Task('Learn DJ STUF!','Learn to make the beats!','2024-02-14',
 tasks.push(task2); // delete later
 content.appendChild(fillTasksTable()); // delete later
 
-//document.body.addEventListener('click', editTask);
+//document.body.addEventListener('click', editBtnListener);
 
 //const test2 = createTask(task2);  comment this to avoid conflicts while build edit-tasks module
 //content.appendChild(test2);

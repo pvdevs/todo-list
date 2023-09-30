@@ -7,13 +7,30 @@ import {createTask, getForm} from './create-task';
 
 const titles = document.querySelectorAll('.task-title');
 
-document.addEventListener('click', editTask)
+document.addEventListener('click', editBtnListener)
 
-function editTask(e) {
+function editBtnListener(e) {
+    
     if (e.target.classList.contains('task-edit-btn')){
-        console.log(e.target);
+
+        const taskId = e.target.parentNode.dataset.id;
+        editTask(taskId);
+
     }
 
 }
 
-export default editTask;
+function editTask(id) {
+    const taskContainer = document.querySelector(`[data-id = ${id} ]`);
+    const task = findTask(id);
+
+    const editTask = createTask(task);
+
+    console.log(taskContainer);
+
+    taskContainer.parentNode.replaceChild(editTask,taskContainer);
+}
+
+
+
+export default editBtnListener;

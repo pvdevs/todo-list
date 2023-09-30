@@ -1,8 +1,8 @@
 import Element from './create-dom-element';
 import {Task, findTask, tasks} from './task';
 import { compareAsc, format } from 'date-fns';
-import {displayTask, fillTasksTable} from './display-task';
-import taskTable from './tasks-table';
+import {displayTask} from './display-task';
+import {taskTable, fillTasksTable} from './tasks-table';
 
 function createTask(task) {
     const container = new Element('div', 'add-task-container').htmlElement;
@@ -109,10 +109,12 @@ function getChoosedPriority(task) {
     return priorityLevels;
 }
 
+/*
 function getPriorityIcon(priority) {
     const icon = new Element('div', 'priority-icon').htmlElement;
 
 }
+*/
 
 function highPriority() {
     const optionHigh = document.createElement('option');
