@@ -101,11 +101,11 @@ function getDate(task) {
 function getChoosedPriority(task) {
     const priorityLevels = {
         'high' : highPriority(),
-        'medium' : mediumPriority(),
+        'mid' : mediumPriority(),
         'low' : lowPriority()
     }
 
-    if(task !== undefined) priorityLevels[task.priority].selected = true;    
+    if(task !== undefined) priorityLevels[task.priority.toLowerCase()].selected = true;
     return priorityLevels;
 }
 

@@ -1,12 +1,20 @@
+//import { container } from 'webpack';
 import Element from './create-dom-element';
 import {Task, findTask, tasks} from './task';
 import {taskTable} from './tasks-table';
 
 // this needs to go, i alredy done this in another module
 
-function getTaskContainer(id) {
-    const _container = new Element('div','task').htmlElement;
+function getContainer(id) {
+    const _container = new Element('div', 'task-container').htmlElement;
+
     _container.dataset.id = id;
+
+    return _container;
+}
+
+function getTaskContainer() {
+    const _container = new Element('div','task').htmlElement;
 
     return _container;
 }
@@ -33,12 +41,15 @@ function getDueDate(date) {
 }
 
 function getPriority(priority) {
+
+    const _priority = priority;
+
     const _container = new Element('div', 'task-priority').htmlElement;
     const _text = new Element('p', 'task-priority-text').htmlElement;
     const _icon = new Element('div', 'task-priority-icon').htmlElement;
 
     _text.textContent = `${priority} priority`;
-    _icon.classList.add(`${priority.toLowerCase()}-priority-icon`);
+    _icon.classList.add(`${_priority.toLowerCase()}-priority-icon`);
 
     _container.append(_text, _icon);
 
@@ -46,8 +57,8 @@ function getPriority(priority) {
 }
 
 function displayTask(task) {
-    const container = new Element('div', 'task-container').htmlElement;
-    const taskContainer = getTaskContainer(task.id);
+    const container = getContainer(task.id);
+    const taskContainer = getTaskContainer();
     const title = getTitle(task.title);
     const description = getDescription(task.description);
     const dueDate = getDueDate(task.dueDate);
