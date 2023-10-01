@@ -3,7 +3,7 @@ import Element from './create-dom-element';
 import {displayTask} from './display-task';
 import {taskTable, fillTasksTable} from './tasks-table';
 import {Task, findTask, tasks} from './task';
-import {createTask} from './create-task';
+import {getAddTaskButton, createTask} from './create-task';
 import editBtnListener from './edit-task';
 
 const content = document.getElementById('content');
@@ -15,6 +15,8 @@ const task2 = new Task('Learn DJ STUF!','Learn to make the beats!','2024-02-14',
 
 tasks.push(task2); // delete later
 content.appendChild(fillTasksTable()); // delete later
+
+content.appendChild(getAddTaskButton());
 
 //document.body.addEventListener('click', editBtnListener);
 

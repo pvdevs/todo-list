@@ -4,6 +4,30 @@ import { compareAsc, format } from 'date-fns';
 import {displayTask} from './display-task';
 import {taskTable, fillTasksTable} from './tasks-table';
 
+const content = document.getElementById('content');
+
+function getAddTaskButton() {
+    const container = new Element('div', 'create-task-container').htmlElement;
+
+    const btn = new Element('button', 'add-task-btn').htmlElement;
+    btn.type = 'button';
+    btn.textContent = 'Add new task';
+
+    btn.addEventListener('click', appendCreateTask);
+
+    container.appendChild(btn);
+    return container;
+}
+
+function appendCreateTask() {
+    const container = document.querySelector('.create-task-container');
+
+    container.replaceChildren();
+    container.appendChild(createTask());
+
+    saveBtnEvent();
+}
+
 function createTask(task) {
     const container = new Element('div', 'add-task-container').htmlElement;
 
@@ -75,8 +99,8 @@ function getFormBottomRight() {
     const cancelBtn = new Element ('button', 'form-btn', 'cancel-btn').htmlElement;
     const saveBtn = new Element ('button', 'form-btn', 'save-btn').htmlElement;
 
-    saveBtn.type = 'button';
-    cancelBtn.type= 'button';
+    saveBtn.type = 'submit';
+    cancelBtn.type= 'cancel';
 
     cancelBtn.textContent = 'Cancel';
     saveBtn.textContent = 'Save';
@@ -108,13 +132,6 @@ function getChoosedPriority(task) {
     if(task !== undefined) priorityLevels[task.priority.toLowerCase()].selected = true;
     return priorityLevels;
 }
-
-/*
-function getPriorityIcon(priority) {
-    const icon = new Element('div', 'priority-icon').htmlElement;
-
-}
-*/
 
 function highPriority() {
     const optionHigh = document.createElement('option');
@@ -175,4 +192,4 @@ function saveBtnEvent() {
     })
 }
 
-export {createTask, getForm};
+export {getAddTaskButton, createTask, getForm};
