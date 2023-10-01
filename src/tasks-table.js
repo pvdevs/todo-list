@@ -1,6 +1,7 @@
 import Element from "./create-dom-element";
 import { tasks } from "./task";
 import displayTask from "./display-task";
+import populateTasks from "./populateStorage";
 
 function taskTable() {
     const tasksContainer = new Element('div', 'tasks-container').htmlElement;
@@ -13,6 +14,7 @@ function fillTasksTable() {
 
     clearTaskTable();
     
+    populateTasks();
     tasks.forEach(task => {
         tasksContainer.appendChild(displayTask(task));
     });

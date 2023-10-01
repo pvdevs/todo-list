@@ -55,6 +55,16 @@ class Task {
         // validation here, prob.
         this._project = value;
     }
+
+    toJSON(){ //need to review, projects must always have a value to go here
+        return {
+            title: this.title,
+            description: this.description,
+            dueDate: this.dueDate,
+            priority: this.priority,
+            id: this.id
+        }
+    }
 }
 
 // Edit Task // Still thinking about this Feature, it may be better if we change directly with findtask, with DOM, that way we can set each info equal to the textContent;

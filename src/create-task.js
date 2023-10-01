@@ -99,14 +99,14 @@ function getFormBottomRight() {
     const cancelBtn = new Element ('button', 'form-btn', 'cancel-btn').htmlElement;
     const saveBtn = new Element ('button', 'form-btn', 'save-btn').htmlElement;
 
-    saveBtn.type = 'submit';
+    saveBtn.type = 'button';
     cancelBtn.type= 'cancel';
 
     cancelBtn.textContent = 'Cancel';
     saveBtn.textContent = 'Save';
 
     formBottomRight.append(cancelBtn, saveBtn);
-
+    
     return formBottomRight
 }
 
@@ -188,6 +188,7 @@ function saveBtnEvent() {
         const task = new Task(title.value, description.value, dueDate.value, priority.value);
         tasks.push(task);
         console.log(task);
+        
         fillTasksTable();
     })
 }
