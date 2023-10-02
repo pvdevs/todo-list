@@ -58,18 +58,23 @@ function getForm(task) {
 
 function getFormTop(task) {
     const formTop = new Element('div', 'add-task-form-top').htmlElement;
-    const title = new Element('input', 'add-task-input', 'title-input').htmlElement;;
-    const description = new Element('textarea', 'add-task-description-label', 'description-textarea').htmlElement;
+    const titleDiv = new Element('div', 'title-input-div').htmlElement;
+    const descriptionDiv = new Element('div', 'description-textarea-div').htmlElement;
+    const title = new Element('input', 'title-input').htmlElement;
+    const description = new Element('textarea', 'description-textarea').htmlElement;
 
     if(task !== undefined) {
         title.value = task.title;
         description.value = task.description;
     } else {
-        title.value = 'teste';
-        description.value = 'teste';
+        title.placeholder = 'Title';
+        description.placeholder = 'Description';
     }
 
-    formTop.append(title, description);
+    titleDiv.appendChild(title)
+    descriptionDiv.appendChild(description);
+
+    formTop.append(titleDiv, descriptionDiv);
 
     return formTop;
 }
@@ -118,7 +123,9 @@ function getDate(task) {
     taskDate.type = 'date';
 
     if(task !== undefined) taskDate.value = task.dueDate;
+    
     taskDate.min = todayDate;
+    taskDate.value = todayDate;
 
     return taskDate;
 }
@@ -180,18 +187,82 @@ function saveBtnEvent() {
 
     saveBtn.addEventListener('click', e => {
 
-        const title = document.getElementById('title-input');
-        const description = document.getElementById('description-textarea');
+        const title = document.querySelector('.title-input');
+        const description = document.querySelector('.description-textarea');
         const dueDate = document.querySelector('.add-task-date');
         const priority = document.querySelector('.select-priority-btn');
         ////
 
-        const task = new Task(title.value, description.value, dueDate.value, priority.value);
-        tasks.push(task);
+        if(formIsInvalid()) return;
+        else {
+           const task = new Task(title.value, description.value, dueDate.value, priority.value);
+           tasks.push(task);
+   
+           updateStorage();
+           checkStorage()
+        }
 
-        updateStorage();
-        checkStorage()
     })
 }
 
-export {getAddTaskButton, createTask, getForm};
+function formIsInvalid() {
+    const form = getFormObj();
+
+    let isInvalid = false;
+
+    clearInvalidInputs(form)
+
+    Object.keys(form).forEach(key => {
+        if (form[key].value === '') {
+
+            const invalidInput = form[key];
+            displayInvalidInput(invalidInput);
+
+            isInvalid = true;
+        }       
+    });
+
+    return isInvalid;
+}
+
+function getFormObj() {
+    const form  = {
+        'title' : document.querySelector('.title-input'),
+        'description' : document.querySelector('.description-textarea'),
+        'dueDate' : document.querySelector('.add-task-date'),
+        'priority' : document.querySelector('.select-priority-btn')
+    }
+
+    return form
+}
+
+function clearInvalidInputs(form){
+    const invalidText = document.querySelector('.invalid-input-text');
+    const titleInput = document.querySelector('.title-input-div');
+    const descriptionTextArea = document.querySelector('.description-textarea-div');
+
+    const titleInputInvalidText = document.querySelector('.title-input-div .invalid-input-text');
+    const descriptionTextAreaInvalidText = document.querySelector('.description-textarea-div .invalid-input-text');
+
+    if(titleInputInvalidText) titleInput.removeChild(titleInputInvalidText);
+    if(descriptionTextAreaInvalidText) descriptionTextArea.removeChild(descriptionTextAreaInvalidText);
+    
+
+
+    Object.keys(form).forEach(key => form[key].classList.remove('invalid-input'));
+}
+
+function displayInvalidInput(input) {
+    const invalidText = new Element('small', 'invalid-input-text').htmlElement;
+    invalidText.textContent = 'This field is required!'
+
+
+    console.log(typeof(input));
+    console.log(input);
+
+    input.parentNode.appendChild(invalidText);
+    input.classList.add('invalid-input');
+}
+
+
+export {getAddTaskButton, createTask, getForm, formIsInvalid};

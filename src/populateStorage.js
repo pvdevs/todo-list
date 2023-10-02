@@ -1,21 +1,22 @@
 import { tasks, Task } from "./task";
 import {taskTable, fillTasksTable} from './tasks-table';
 
+
 const content = document.getElementById('content');
 
 function checkStorage() {
     if (!localStorage.getItem('tasks')) {
         
-        console.log('populatin'); // remove later
+        //console.log('populatin'); // remove later
 
         populateStorage();
         content.appendChild(fillTasksTable())
       
     } else {
         
-        console.log(localStorage.getItem('tasks'));
+       // console.log(localStorage.getItem('tasks'));
         
-        console.log('not populatin'); // remove later
+        //console.log('not populatin'); // remove later
         
         setStyles();
         content.appendChild(fillTasksTable())
@@ -25,6 +26,7 @@ function checkStorage() {
 function updateStorage() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
+
 
 function setStyles() {
 
@@ -43,7 +45,7 @@ function populateStorage() {
 
     localStorage.setItem('tasks',JSON.stringify(tasks)); // To set tasks in the beginning of events
     
-    console.log(localStorage.getItem('tasks'));
+    //console.log(localStorage.getItem('tasks'));
     setStyles();
 }
 

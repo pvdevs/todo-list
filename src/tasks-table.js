@@ -15,8 +15,6 @@ function fillTasksTable() {
 
     clearTaskTable();
 
-    console.log('filltaskstable called');
-
     tasks.forEach(task => {
         tasksContainer.appendChild(displayTask(task));
     });
