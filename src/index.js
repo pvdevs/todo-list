@@ -10,8 +10,10 @@ import {checkStorage} from './populateStorage';
 const content = document.getElementById('content');
 content.appendChild(taskTable()); // This starts the task table
 
+const tasksContainer = document.querySelector('.tasks-container');
+
 checkStorage();
 
 //content.appendChild(fillTasksTable()); // delete later
-content.appendChild(getAddTaskButton());
+//tasksContainer.appendChild(getAddTaskButton());
 

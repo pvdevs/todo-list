@@ -2,6 +2,7 @@ import Element from "./create-dom-element";
 import { tasks } from "./task";
 import displayTask from "./display-task";
 import checkStorage from "./populateStorage";
+import {getAddTaskButton, createTask} from './create-task';
 
 function taskTable() {
     const tasksContainer = new Element('div', 'tasks-container').htmlElement;
@@ -19,6 +20,8 @@ function fillTasksTable() {
     tasks.forEach(task => {
         tasksContainer.appendChild(displayTask(task));
     });
+
+    tasksContainer.appendChild(getAddTaskButton());
 
     return tasksContainer;
 }

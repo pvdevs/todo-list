@@ -4,6 +4,7 @@ import { compareAsc, format } from 'date-fns';
 import {displayTask} from './display-task';
 import {taskTable, fillTasksTable} from './tasks-table';
 import {createTask, getForm} from './create-task';
+import { checkStorage, updateStorage } from './populateStorage';
 
 const titles = document.querySelectorAll('.task-title');
 
@@ -48,7 +49,8 @@ function saveChanges(task) {
         task.dueDate = dueDate.value;
         task.priority = priority.value;
 
-        fillTasksTable();
+        updateStorage();
+        checkStorage()
     });
 }
 
