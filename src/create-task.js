@@ -3,8 +3,18 @@ import {Task, findTask, tasks} from './task';
 import { compareAsc, format } from 'date-fns';
 import {displayTask} from './display-task';
 import {taskTable, fillTasksTable} from './tasks-table';
+import {checkStorage, updateStorage} from './populateStorage';
 
 const content = document.getElementById('content');
+
+function appendCreateTask() {
+    const container = document.querySelector('.create-task-container');
+
+    container.replaceChildren();
+    container.appendChild(createTask());
+
+    saveBtnEvent();
+}
 
 function getAddTaskButton() {
     const container = new Element('div', 'create-task-container').htmlElement;
@@ -17,15 +27,6 @@ function getAddTaskButton() {
 
     container.appendChild(btn);
     return container;
-}
-
-function appendCreateTask() {
-    const container = document.querySelector('.create-task-container');
-
-    container.replaceChildren();
-    container.appendChild(createTask());
-
-    saveBtnEvent();
 }
 
 function createTask(task) {
@@ -187,9 +188,9 @@ function saveBtnEvent() {
 
         const task = new Task(title.value, description.value, dueDate.value, priority.value);
         tasks.push(task);
-        console.log(task);
-        
-        fillTasksTable();
+
+        updateStorage();
+        checkStorage()
     })
 }
 
