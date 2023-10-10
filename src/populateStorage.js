@@ -6,20 +6,12 @@ const content = document.getElementById('content');
 
 function checkStorage() {
     if (!localStorage.getItem('tasks')) {
-        
-        //console.log('populatin'); // remove later
-
         populateStorage();
-        content.appendChild(fillTasksTable())
+        content.appendChild(fillTasksTable());
       
     } else {
-        
-       // console.log(localStorage.getItem('tasks'));
-        
-        //console.log('not populatin'); // remove later
-        
         setStyles();
-        content.appendChild(fillTasksTable())
+        content.appendChild(fillTasksTable());
       }
 }
 

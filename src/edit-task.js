@@ -29,6 +29,7 @@ function editTask(id) {
     taskContainer.replaceChild(editTask, taskContainer.firstChild);
 
     saveChanges(task);
+    cancelChanges(task);
 }
 
 function saveChanges(task) {
@@ -57,8 +58,27 @@ function saveChanges(task) {
 
 function cancelChanges(task) {
     const btn = document.getElementById('cancel-btn');
+    
 
-    btn.addEventListener('click')
+    btn.addEventListener('click', e => {
+        //const taskId = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.dataset.id;
+        const taskId = document.getElementById('cancel-btn').closest('.task-container').dataset.id;
+        
+        console.log(taskId);
+        resetTask(taskId);
+
+    });
+}
+
+function resetTask(id){
+    const task = findTask(id);
+    const taskElement = document.querySelector(`[data-id=${id}]`);
+    const tasksContainer = document.querySelector('.tasks-container');
+
+    tasksContainer.removeChild(taskElement);
+
+    updateStorage();
+    checkStorage()
 }
 
 export default editBtnListener;

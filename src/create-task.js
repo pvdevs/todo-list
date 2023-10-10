@@ -14,6 +14,7 @@ function appendCreateTask() {
     container.appendChild(createTask());
 
     saveBtnEvent();
+    cancelBtnEvent();
 }
 
 function getAddTaskButton() {
@@ -106,7 +107,7 @@ function getFormBottomRight() {
     const saveBtn = new Element ('button', 'form-btn', 'save-btn').htmlElement;
 
     saveBtn.type = 'button';
-    cancelBtn.type= 'cancel';
+    cancelBtn.type= 'button';
 
     cancelBtn.textContent = 'Cancel';
     saveBtn.textContent = 'Save';
@@ -115,6 +116,7 @@ function getFormBottomRight() {
     
     return formBottomRight
 }
+
 
 function getDate(task) {
     const todayDate = format(new Date(), 'yyyy-MM-dd');
@@ -182,6 +184,18 @@ function getPriority(task) {
     return selectContainer;
 }
 
+function cancelBtnEvent() {
+    const cancelBtn = document.getElementById('cancel-btn');
+
+    cancelBtn.addEventListener('click', e => {
+        const tasksContainer = document.querySelector('.tasks-container');
+        const createTaskContainer = document.querySelector('.create-task-container');
+        tasksContainer.removeChild(createTaskContainer);
+
+        tasksContainer.appendChild(getAddTaskButton());
+    })
+}
+
 function saveBtnEvent() {
     const saveBtn = document.getElementById('save-btn');
 
@@ -194,10 +208,11 @@ function saveBtnEvent() {
         ////
 
         if(formIsInvalid()) return;
+
         else {
            const task = new Task(title.value, description.value, dueDate.value, priority.value);
            tasks.push(task);
-   
+
            updateStorage();
            checkStorage()
         }
@@ -206,6 +221,7 @@ function saveBtnEvent() {
 }
 
 function formIsInvalid() {
+
     const form = getFormObj();
 
     let isInvalid = false;
